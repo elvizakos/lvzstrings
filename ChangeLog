@@ -1,0 +1,25 @@
+2021-05-19  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* lvzstrings-mode.el (lvzstrings-mode): Temporarily remove "url-deconding" and "url-encoding" options.
+
+2021-05-18  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* lvzstrings-mode.el: Merge with lvzmovetext-mode.
+
+2020-11-20  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* lvzstrings-mode.el: Add option "lvzstr/lvzstrings-onespace-regex" for setting regular expression from the option page.
+	Add function "lvzstr/trim" for trimming leading and trailing spaces from current line or selection.
+	Add function "lvzstr/ltrim" for trimming leading spaces from current line or selection.
+	Add function "lvzstr/rtrim" for trimming trailing spaces from current line or selection.
+	Change function's name from "lvzstrings/onespace" to "lvzstr/onespace".
+	(lvzstr/trim): Add documentation.
+	(lvzstr/ltrim): Add documentation.
+	(lvzstr/rtrim): Add documentation.
+
+2019-12-22  elvizakos  <elvizakos@mainserver>
+
+	* lvzstrings-mode.el: Begining of project
+	Added function lvzstrings/onespace for removing unnecessary spaces in selected area (region).
+	Added minor mode.
+
