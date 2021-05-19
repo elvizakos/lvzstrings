@@ -1,6 +1,7 @@
 2021-05-19  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* lvzstrings-mode.el (lvzstrings-mode): Temporarily remove "url-deconding" and "url-encoding" options.
+	Change moving line and indenting keys.
 
 2021-05-18  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
