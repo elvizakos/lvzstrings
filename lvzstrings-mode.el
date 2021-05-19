@@ -30,19 +30,19 @@
 (defgroup lvzstrings/lvzstrings-keys nil "LVzStrings minor mode key settings."
   :group 'tools)
 
-(defcustom lvzstrings/lvzstrings-moveup-keycomb "M-<up>" "Default key combination for moving text up one line."
+(defcustom lvzstrings/lvzstrings-moveup-keycomb "M-s-<up>" "Default key combination for moving text up one line."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-movedown-keycomb "M-<down>" "Default key combination for moving text down one line."
+(defcustom lvzstrings/lvzstrings-movedown-keycomb "M-s-<down>" "Default key combination for moving text down one line."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-indent-keycomb "M-<right>" "Default key combination for indenting current line or selected lines."
+(defcustom lvzstrings/lvzstrings-indent-keycomb "M-s-<right>" "Default key combination for indenting current line or selected lines."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-unindent-keycomb "M-<left>" "Default key combination for unindenting curret line or selected lines."
+(defcustom lvzstrings/lvzstrings-unindent-keycomb "M-s-<left>" "Default key combination for unindenting curret line or selected lines."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
