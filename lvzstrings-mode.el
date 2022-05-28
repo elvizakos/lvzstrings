@@ -82,6 +82,10 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
+(defcustom lvzstrings/lvzstrings-translate-keycomb "C-c C-v C-y" "Default key combination for translating the text in region."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
 (defgroup lvzstrings/lvzregexes nil "LVzStrings minor mode regular exressions settings."
   :group 'tools)
 
@@ -272,6 +276,24 @@
 		 (goto-char begin)
 		 (insert str)))
 
+(defun lvzstrings/translate-region (start end) "Function to translate region. This function just runs the \"trans\" command."
+	   (interactive "r")
+	   (let ((cmdstr "/usr/bin/trans %s %s:%s \"%s\"")
+			 (options "-show-original n -show-original-phonetics n -show-translation Y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary n -show-alternatives n")
+			 (inlang "")
+			 (outlang "el")
+			 (txt (buffer-substring start end))
+			 )
+
+		 (if (region-active-p) (progn
+								 (setq inlang (completing-read "Input language: " '("" "en" "el")))
+								 (setq outlang (completing-read "Output language: " '("en" "el")))
+								 (kill-region start end)
+								 (insert (shell-command-to-string (format cmdstr options inlang outlang txt)))
+								 )
+		   (error "There must be a selection"))
+		 ))
+
 ;;---- MINOR MODE ------------------------------------------------------------------
 
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
@@ -298,7 +320,7 @@
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuencodeb64] ; encode base64
 			  '("Encode selection to Base64" . base64-encode-region))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator3] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator4] '("--"))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenurtrim] ; rtrim spaces
 			  '("Remove spaces from ending of selection " . lvzstrings/rtrim))
@@ -312,12 +334,12 @@
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuremovespaces] ; remove spaces
 			  '("Remove unnecessary spaces" . lvzstrings/onespace))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator2] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator3] '("--"))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuwhispacemode] ;enable/disable whitespace mode
 			  '("Enable/disable whitespace mode" . whitespace-mode))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator1] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator2] '("--"))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuunindent] ; unindent
 			  '("Unindent line or selected lines" . lvzstrings/unindent))
@@ -325,13 +347,18 @@
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuindent] ; indent
 			  '("Indent line or selected lines" . lvzstrings/indent))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator1] '("--"))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinedown] ; move line down
 			  '("Move line Down" . lvzstrings/move-line-down))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulineup] ; move line up
 			  '("Move line Up" . lvzstrings/move-line-up))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutranslate] ; Translate selected text
+			  '("Translate region" . lvzstrings/translate-region))
 
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
@@ -370,6 +397,8 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-indent-keycomb) 'lvzstrings/indent)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-unindent-keycomb) 'lvzstrings/unindent)
 
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-translate-keycomb) 'lvzstrings/translate-region)
+
 			lvzstrings/lvzstrings-keymap)
   :global 1
 
@@ -379,7 +408,12 @@
 (lvzstrings-mode 1)
 
 (provide 'lvzstrings-mode)
+;; (url-encode-url "https://google.com/this   is a url")
+;; (url-hexify-string
+;; (url-unhex-string (url-encode-url "https://google.com/this   is a url"))
 
+
+;; w3m-url-decode-string
 ;; Test here. Use ~M-x whitespace-mode~ to see
 ;; this is 		a    string
 ;; this is  a    string   
