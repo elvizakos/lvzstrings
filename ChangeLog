@@ -1,3 +1,10 @@
+2022-05-29  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* lvzstrings-mode.el (lvzstrings/lvzstrings-translate-keycomb): Add option for translation key combination.
+	Add function "lvzstrings/translate-region" for translating the selected text.
+	(lvzstrings-mode): Add option to the minor-mode menu for translating the region.
+	(lvzstrings-mode): Add key combination for translating selected text.
+
 2021-05-19  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* lvzstrings-mode.el (lvzstrings-mode): Temporarily remove "url-deconding" and "url-encoding" options.
