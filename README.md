@@ -46,7 +46,7 @@ tar -xvf ".<TAR_FILE_PACKAGE>" -C "~/.emacs.d/elpa/"
 ### Simple installation ###
 This can also be installed by adding somewhere in emacs init file the following line:
 ```lisp
-(load "/path/to/lvznumbers-mode.el")
+(load "/path/to/lvzstrings-mode.el")
 ```
 
 ## Usage ##
