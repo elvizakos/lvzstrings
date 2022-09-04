@@ -1,3 +1,18 @@
+2022-09-04  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* VERSION set to 2.1.2
+
+	* Makefile (VERSION): Set version to 2.1.2
+
+	* lvzstrings-mode.el: Add function "lvzstrings/urlencode".
+	Add function "lvzstrings/urldecode".
+	Add menu item for "lvzstrings/urlencode".
+	Add menu item for "lvzstrings/urldecode".
+	Add Key combination for "lvzstrings/urlencode".
+	Add key combination for "lvzstrings/urldecode".
+	Add "LVzStrings" submenu under "Tools" menu.
+	Add "Translate region" menu item for "LVzStrings" submenu.
+
 2022-05-29  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* lvzstrings-mode.el (lvzstrings/lvzstrings-translate-keycomb): Add option for translation key combination.
