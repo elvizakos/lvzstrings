@@ -3,7 +3,7 @@
 
 ;; Copyright © 2019, Nikos Skarmoutsos
 
-;; Version: VERSION
+;; Version: %%VERSION%%
 ;; Author: Nikos Skarmoutsos <elvizakos AT yahoo DOT gr>
 ;; Maintainer: Nikos Skarmoutsos
 ;; Created: Dec 2019
@@ -14,7 +14,7 @@
 ;;; Code:
 
 ;;---- CONSTANTS ------------------------------------------------------------------
-(defconst lvzstrings/lvzstrings-version "VERSION" "LVzStrings version.")
+(defconst lvzstrings/lvzstrings-version "%%VERSION%%" "LVzStrings version.")
 
 ;;---- VARIABLES ------------------------------------------------------------------
 (defvar lvzstrings/lvzstrings-keymap (make-sparse-keymap) "Keymap for lvzstrings.")
@@ -294,23 +294,51 @@
 		   (error "There must be a selection"))
 		 ))
 
+(defun lvzstrings/urlencode (start end) "Function to url encode region. This function just uses the \"url-hexify-string\" function."
+	   (interactive "r")
+	   (let ((txt (buffer-substring start end)))
+		 (if (region-active-p) (progn
+								 (kill-region start end)
+								 (insert (url-hexify-string txt))
+								 )
+		   (error "There must be a selection"))
+		 ))
+
+(defun lvzstrings/urldecode (start end) "Function to url decode region. This function just uses the \"url-unhex-string\" function."
+	   (interactive "r")
+	   (let ((txt (buffer-substring start end)))
+		 (if (region-active-p) (progn
+								 (kill-region start end)
+								 (insert (url-unhex-string txt))
+								 )
+		   (error "There must be a selection"))
+		 ))
+
 ;;---- MINOR MODE ------------------------------------------------------------------
 
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
   :lighter lvzstrings/lighter
   :keymap (let ((lvzstringsmap (make-sparse-keymap)))
 
+			;; Menu under Tools
+			(define-key-after global-map [menu-bar tools lvzstringstmenu]
+			  (cons "LVzStrings" (make-sparse-keymap "major modes")) 'kill-buffer )
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
+			  '("Translate region" . lvzstrings/translate-region))
+
+			;;;;;;;;
 			(define-key-after		 ; Menu for LVzStrings mode
 			  lvzstrings/lvzstrings-keymap
 			  [menu-bar lvzstringsmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "lvzstrings mode"))
 			  'kill-buffer)
 
-			;; (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodeurl] ; decode url
-			;;   '("Decode URL selection" . url-decode-selection))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodeurl] ; decode url
+			  '("Decode URL selection" . lvzstrings/urldecode))
 
-			;; (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuecodeurl] ; encode url
-			;;   '("Encode selection for use in URL" . url-encode-selection))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuecodeurl] ; encode url
+			  '("Encode selection for use in URL" . lvzstrings/urlencode))
 
 			;; (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator4] '("--"))
 
@@ -380,8 +408,8 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-base64-encode-keycomb) 'base64-encode-region)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-base64-decode-keycomb) 'base64-decode-region)
 
-			;; (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-encode-keycomb) 'url-encode-selection)
-			;; (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-decode-keycomb) 'url-decode-selection)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-encode-keycomb) 'lvzstrings/urlencode)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-decode-keycomb) 'lvzstrings/urldecode)
 
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-trim-spaces-keycomb) 'lvzstrings/trim)
 
