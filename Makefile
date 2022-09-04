@@ -1,4 +1,4 @@
-VERSION:=2.0.1
+VERSION:=2.1.2
 PACKAGE_NAME:=lvzstrings-mode-$(VERSION)
 PACKAGE_DIR:=/tmp/$(PACKAGE_NAME)
 
@@ -11,8 +11,8 @@ $(PACKAGE_DIR):
 	cp -r ./* $@
 	sed -re "s/VERSION/$(VERSION)/" $@/lvzstrings-mode-pkg.el > $@/"~tmp~"
 	mv $@/"~tmp~" $@/lvzstrings-mode-pkg.el
-	sed -re 's/;; Version: VERSION/;; Version: '"$(VERSION)"'/' $@/lvzstrings-mode.el > $@/"~tmp~"
-	sed -re 's/\(defconst lvzstrings-version \"VERSION\"/\(defconst lvzstrings-version "'"$(VERSION)"'"/' $@/"~tmp~" > $@/lvzstrings-mode.el
+	sed -re 's/;; Version: %%VERSION%%/;; Version: '"$(VERSION)"'/' $@/lvzstrings-mode.el > $@/"~tmp~"
+	sed -re 's/\(defconst lvzstrings-version \"%%VERSION%%\"/\(defconst lvzstrings-version "'"$(VERSION)"'"/' $@/"~tmp~" > $@/lvzstrings-mode.el
 	rm $@/"~tmp~"
 
 install:
