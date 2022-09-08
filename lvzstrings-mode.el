@@ -86,6 +86,10 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
+(defcustom lvzstrings/lvzstrings-spellcheck-keycomb "C-c C-v C-g" "Default key combination for spell checking the current buffer."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
 (defgroup lvzstrings/lvzregexes nil "LVzStrings minor mode regular exressions settings."
   :group 'tools)
 
@@ -314,6 +318,15 @@
 		   (error "There must be a selection"))
 		 ))
 
+(defun lvzstrings/spellcheck () "Function for spellchecking current buffer."
+	   (interactive)
+	   (flyspell-buffer))
+
+(defun lvzstrings/spellCheckOntheFlyProg () "Function for enabling spell check."
+  (interactive)
+  (flyspell-mode 1)
+  (flyspell-prog-mode))
+
 ;;---- MINOR MODE ------------------------------------------------------------------
 
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
@@ -323,6 +336,58 @@
 			;; Menu under Tools
 			(define-key-after global-map [menu-bar tools lvzstringstmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "major modes")) 'kill-buffer )
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodeurl]
+			  '("Decode URL selection" . lvzstrings/urldecode))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuecodeurl]
+			  '("Encode selection for use in URL" . lvzstrings/urlencode))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodeb64]
+			  '("Decode a Base64 selection" . base64-decode-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodeb64]
+			  '("Encode selection to Base64" . base64-encode-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu tseparator4] '("--"))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenurtrim]
+			  '("Remove spaces from ending of selection " . lvzstrings/rtrim))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenultrim]
+			  '("Remove spaces from beginning of selection " . lvzstrings/ltrim))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutrim]
+			  '("Remove spaces from beginning and ending of selection " . lvzstrings/trim))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuremovespaces]
+			  '("Remove unnecessary spaces" . lvzstrings/onespace))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu tseparator3] '("--"))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuwhispacemode]
+			  '("Enable/disable whitespace mode" . whitespace-mode))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu tseparator2] '("--"))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuunindent]
+			  '("Unindent line or selected lines" . lvzstrings/unindent))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuindent]
+			  '("Indent line or selected lines" . lvzstrings/indent))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu tseparator1] '("--"))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenumlinedown]
+			  '("Move line Down" . lvzstrings/move-line-down))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenumlineup]
+			  '("Move line Up" . lvzstrings/move-line-up))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu tseparator0] '("--"))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutspellcheck]
+			  '("Spellcheck buffer" . lvzstrings/spellcheck))
 
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
@@ -385,6 +450,9 @@
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
 
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspellcheck]  ; Spellcheck current buffer
+			  '("Spellcheck buffer" . lvzstrings/spellcheck))
+
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
 
@@ -425,6 +493,7 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-indent-keycomb) 'lvzstrings/indent)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-unindent-keycomb) 'lvzstrings/unindent)
 
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-translate-keycomb) 'lvzstrings/translate-region)
 
 			lvzstrings/lvzstrings-keymap)
@@ -436,6 +505,36 @@
 (lvzstrings-mode 1)
 
 (provide 'lvzstrings-mode)
+
+(with-eval-after-load "ispell" ;; Φόρτωση του hunspell και λεξικών (en_US,el_GR,de_DE)
+  (add-to-list 'ispell-local-dictionary-alist '("greek-hunspell"
+												"[[:alpha:]]"
+												"[^[:alpha:]]"
+												"[']"
+												t
+												("-d" "el_GR")
+												nil
+												utf-8))
+
+  (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
+												"[[:alpha:]]"
+												"[^[:alpha:]]"
+												"[']"
+												t
+												("-d" "de_DE")
+												nil
+												utf-8))
+
+  (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
+												"[[:alpha:]]"
+												"[^[:alpha:]]"
+												"[']"
+												t
+												("-d" "en_US")
+												nil
+												utf-8))
+  (add-hook 'prog-mode-hook 'spellCheckOntheFlyProg))
+
 ;; (url-encode-url "https://google.com/this   is a url")
 ;; (url-hexify-string
 ;; (url-unhex-string (url-encode-url "https://google.com/this   is a url"))
