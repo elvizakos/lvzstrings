@@ -282,7 +282,7 @@
 
 (defun lvzstrings/translate-region (start end) "Function to translate region. This function just runs the \"trans\" command."
 	   (interactive "r")
-	   (let ((cmdstr "/usr/bin/trans %s %s:%s \"%s\"")
+	   (let ((cmdstr "/usr/bin/trans %s %s:%s %s")
 			 (options "-show-original n -show-original-phonetics n -show-translation Y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary n -show-alternatives n")
 			 (inlang "")
 			 (outlang "el")
@@ -290,11 +290,11 @@
 			 )
 
 		 (if (region-active-p) (progn
-								 (setq inlang (completing-read "Input language: " '("" "en" "el")))
-								 (setq outlang (completing-read "Output language: " '("en" "el")))
-								 (kill-region start end)
-								 (insert (shell-command-to-string (format cmdstr options inlang outlang txt)))
-								 )
+		 						 (setq inlang (completing-read "Input language: " '("" "en" "el")))
+		 						 (setq outlang (completing-read "Output language: " '("en" "el")))
+		 						 (kill-region start end)
+		 						 (insert (shell-command-to-string (format cmdstr options inlang outlang txt)))
+		 						 )
 		   (error "There must be a selection"))
 		 ))
 
