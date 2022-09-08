@@ -1,4 +1,4 @@
-VERSION:=2.2.6
+VERSION:=2.2.10
 PACKAGE_NAME:=lvzstrings-mode-$(VERSION)
 PACKAGE_DIR:=/tmp/$(PACKAGE_NAME)
 
