@@ -1,4 +1,14 @@
+2022-09-09  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* VERSION set to 2.2.10
+
+	* Makefile (VERSION): Set version to 2.2.10
+
+	* lvzstrings-mode.el (lvzstrings/translate-region): Escape string before sending it to the translate program.
+
 2022-09-08  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* Makefile (VERSION): Set version to 2.2.7
 
 	* VERSION set to 2.2.6
 
