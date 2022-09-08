@@ -1,3 +1,17 @@
+2022-09-08  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* VERSION set to 2.2.6
+
+	* Makefile (VERSION): Set version to 2.2.6
+
+	* VERSION set to 2.2.3
+
+	* Makefile (VERSION): Set version to 2.2.3
+
+	* lvzstrings-mode.el (lvzstrings/lvzstrings-spellcheck-keycomb): Add option for spellcheking key combination.
+	(lvzstrings/spellCheckOntheFlyProg): Add function for enabling spellchecking current buffer.
+	(lvzstrings/spellcheck): Add function for spellchecking current buffer.
+
 2022-09-04  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* VERSION set to 2.1.2
