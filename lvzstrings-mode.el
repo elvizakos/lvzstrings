@@ -286,7 +286,7 @@
 			 (options "-show-original n -show-original-phonetics n -show-translation Y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary n -show-alternatives n")
 			 (inlang "")
 			 (outlang "el")
-			 (txt (buffer-substring start end))
+			 (txt (json-encode-string (buffer-substring start end)))
 			 )
 
 		 (if (region-active-p) (progn
