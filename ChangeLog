@@ -1,3 +1,20 @@
+2022-10-03  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
+
+	* VERSION set to 2.2.11
+
+	* Makefile (VERSION): Set version to 2.2.11
+
+	* lvzstrings-mode.el (lvzstrings/htmlencode): Add function "lvzstrings/htmlencode".
+	(lvzstrings/htmldecode): Add function "lvzstrings/htmldecode".
+	(lvzstrings/lvzstrings-html-encode-keycomb): Add option for html encode key combination.
+	(lvzstrings/lvzstrings-html-decode-keycomb): Add option for html decode key combination.
+	(lvzstrings-mode): Add menu entry for encoding selection to html entities, to the tools menu.
+	(lvzstrings-mode): Add menu entry for decoding html entities in selection, to the tools menu.
+	(lvzstrings-mode): Add menu entry for encoding selection to html entities, to the minor mode menu.
+	(lvzstrings-mode): Add menu entry for decoding html entities in selection, to the minor mode menu.
+	(lvzstrings-mode): Add shortcut for the "lvzstrings/htmlencode" function.
+	(lvzstrings-mode): Add shortcut for the "lvzstrings/htmldecode" function.
+
 2022-09-09  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* VERSION set to 2.2.10
