@@ -78,6 +78,14 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
+(defcustom lvzstrings/lvzstrings-html-encode-keycomb "C-c M-h e" "Default key combination for encoding selected string for use in html."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-html-decode-keycomb "C-c M-h d" "Default key combination for decoding html entities in selected string."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
 (defcustom lvzstrings/lvzstrings-whitespace-keycomb "C-c C-v C-SPC" "Default key combination for enabling/disabling whitespace mode."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
@@ -318,6 +326,22 @@
 		   (error "There must be a selection"))
 		 ))
 
+(defun lvzstrings/htmlencode (start end) "Function to encode region to HTML entities. This function just calls \"recode\" program."
+	   (interactive "r")
+	   (let ((txt (buffer-substring start end)))
+		 (if (region-active-p) (progn
+								 (call-process-region start end "recode" t t nil "..HTML_4.0"))
+		   (error "There must be a selection"))
+		 ))
+
+(defun lvzstrings/htmldecode (start end) "Function to decode HTML. This function just calls \"recode\" program."
+	   (interactive "r")
+	   (let ((txt (buffer-substring start end)))
+		 (if (region-active-p) (progn
+								 (call-process-region start end "recode" t t nil "html..UTF-8"))
+		   (error "There must be a selection"))
+		 ))
+
 (defun lvzstrings/spellcheck () "Function for spellchecking current buffer."
 	   (interactive)
 	   (flyspell-buffer))
@@ -336,6 +360,12 @@
 			;; Menu under Tools
 			(define-key-after global-map [menu-bar tools lvzstringstmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "major modes")) 'kill-buffer )
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodehtml]
+			  '("Decode HTML selection" . lvzstrings/htmldecode))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodehtml]
+			  '("Encode HTML selection" . lvzstrings/htmlencode))
 
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodeurl]
 			  '("Decode URL selection" . lvzstrings/urldecode))
@@ -398,6 +428,12 @@
 			  [menu-bar lvzstringsmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "lvzstrings mode"))
 			  'kill-buffer)
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodehtml]
+			  '("Decode HTML selection" . lvzstrings/htmldecode))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuencodehtml]
+			  '("Encode HTML selection" . lvzstrings/htmlencode))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodeurl] ; decode url
 			  '("Decode URL selection" . lvzstrings/urldecode))
@@ -479,6 +515,9 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-encode-keycomb) 'lvzstrings/urlencode)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-url-decode-keycomb) 'lvzstrings/urldecode)
 
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-html-encode-keycomb) 'lvzstrings/htmlencode)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-html-decode-keycomb) 'lvzstrings/htmldecode)
+
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-trim-spaces-keycomb) 'lvzstrings/trim)
 
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-ltrim-spaces-keycomb) 'lvzstrings/ltrim)
@@ -544,3 +583,8 @@
 ;; Test here. Use ~M-x whitespace-mode~ to see
 ;; this is 		a    string
 ;; this is  a    string   
+
+
+;; TEST HTML ENTITIES:
+;; ENCODE: <>&&&
+
