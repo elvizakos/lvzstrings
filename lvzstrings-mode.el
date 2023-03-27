@@ -27,6 +27,10 @@
   :type 'string
   :group 'lvzstrings)
 
+(defcustom lvzstrings/dictionary-command "/usr/bin/sdcv %s" "Shell command of the dictionary."
+  :type 'string
+  :group 'lvzstrings)
+
 (defgroup lvzstrings/lvzstrings-keys nil "LVzStrings minor mode key settings."
   :group 'tools)
 
@@ -91,6 +95,10 @@
   :group 'lvzstrings/lvzstrings-keys)
 
 (defcustom lvzstrings/lvzstrings-translate-keycomb "C-c C-v C-y" "Default key combination for translating the text in region."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-dictionary-keycomb "C-c C-v C-w" "Default key combination for searching the word in the dictionary."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
@@ -351,6 +359,33 @@
   (flyspell-mode 1)
   (flyspell-prog-mode))
 
+(defun lvzstrings/dictionary (start end) "Function for creating new buffer with the definitions of the selected word."
+	   (interactive "r")
+	   (let ((dictcmd lvzstrings/dictionary-command)
+			 (txt (json-encode-string (buffer-substring-no-properties start end)))
+			 ($buff nil)
+			 (dictionary-keymap nil)
+			 )
+		 
+		 (if (region-active-p) (progn
+								 (setq $buff (generate-new-buffer "*Dictionary*")
+									   dictionary-keymap (make-sparse-keymap))
+
+								 (switch-to-buffer $buff)
+								 (insert (shell-command-to-string (format dictcmd txt)))
+								 (font-lock-mode 1)
+								 (use-local-map dictionary-keymap)
+
+								 (define-key dictionary-keymap (kbd "q") (lambda()
+																		   (interactive)
+																		   (kill-buffer)
+																		   ))
+								 (read-only-mode 1)
+								 (goto-char 0)
+								 )
+		   (error "There must be a selection"))
+		 ))
+
 ;;---- MINOR MODE ------------------------------------------------------------------
 
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
@@ -422,6 +457,9 @@
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
 
+			(define-key global-map [menu-bar tools lvzstringsmenu lvzstringsmenudictionary]
+			  '("Dictionary" . lvzstrings/dictionary))
+
 			;;;;;;;;
 			(define-key-after		 ; Menu for LVzStrings mode
 			  lvzstrings/lvzstrings-keymap
@@ -492,6 +530,9 @@
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
 
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudictionary] ; Dictionary
+			  '("Dictionary" . lvzstrings/dictionary))
+
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-indent-keycomb))
@@ -534,6 +575,7 @@
 
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-translate-keycomb) 'lvzstrings/translate-region)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-dictionary-keycomb) 'lvzstrings/dictionary)
 
 			lvzstrings/lvzstrings-keymap)
   :global 1
@@ -545,34 +587,34 @@
 
 (provide 'lvzstrings-mode)
 
-(with-eval-after-load "ispell" ;; Φόρτωση του hunspell και λεξικών (en_US,el_GR,de_DE)
-  (add-to-list 'ispell-local-dictionary-alist '("greek-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "el_GR")
-												nil
-												utf-8))
+;; (with-eval-after-load "ispell" ;; Φόρτωση του hunspell και λεξικών (en_US,el_GR,de_DE)
+;;   (add-to-list 'ispell-local-dictionary-alist '("greek-hunspell"
+;; 												"[[:alpha:]]"
+;; 												"[^[:alpha:]]"
+;; 												"[']"
+;; 												t
+;; 												("-d" "el_GR")
+;; 												nil
+;; 												utf-8))
 
-  (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "de_DE")
-												nil
-												utf-8))
+;;   (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
+;; 												"[[:alpha:]]"
+;; 												"[^[:alpha:]]"
+;; 												"[']"
+;; 												t
+;; 												("-d" "de_DE")
+;; 												nil
+;; 												utf-8))
 
-  (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "en_US")
-												nil
-												utf-8))
-  (add-hook 'prog-mode-hook 'spellCheckOntheFlyProg))
+;;   (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
+;; 												"[[:alpha:]]"
+;; 												"[^[:alpha:]]"
+;; 												"[']"
+;; 												t
+;; 												("-d" "en_US")
+;; 												nil
+;; 												utf-8))
+;;   (add-hook 'prog-mode-hook 'spellCheckOntheFlyProg))
 
 ;; (url-encode-url "https://google.com/this   is a url")
 ;; (url-hexify-string
