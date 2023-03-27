@@ -27,6 +27,10 @@
   :type 'string
   :group 'lvzstrings)
 
+(defcustom lvzstrings/translate-command "/usr/bin/trans %s %s:%s %s" "Shell command to use for translate."
+  :type 'string
+  :group 'lvzstrings)
+
 (defcustom lvzstrings/dictionary-command "/usr/bin/sdcv %s" "Shell command of the dictionary."
   :type 'string
   :group 'lvzstrings)
@@ -298,7 +302,7 @@
 
 (defun lvzstrings/translate-region (start end) "Function to translate region. This function just runs the \"trans\" command."
 	   (interactive "r")
-	   (let ((cmdstr "/usr/bin/trans %s %s:%s %s")
+	   (let ((cmdstr lvzstrings/translate-command)
 			 (options "-show-original n -show-original-phonetics n -show-translation Y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary n -show-alternatives n")
 			 (inlang "")
 			 (outlang "el")
@@ -586,35 +590,6 @@
 (lvzstrings-mode 1)
 
 (provide 'lvzstrings-mode)
-
-;; (with-eval-after-load "ispell" ;; Φόρτωση του hunspell και λεξικών (en_US,el_GR,de_DE)
-;;   (add-to-list 'ispell-local-dictionary-alist '("greek-hunspell"
-;; 												"[[:alpha:]]"
-;; 												"[^[:alpha:]]"
-;; 												"[']"
-;; 												t
-;; 												("-d" "el_GR")
-;; 												nil
-;; 												utf-8))
-
-;;   (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
-;; 												"[[:alpha:]]"
-;; 												"[^[:alpha:]]"
-;; 												"[']"
-;; 												t
-;; 												("-d" "de_DE")
-;; 												nil
-;; 												utf-8))
-
-;;   (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-;; 												"[[:alpha:]]"
-;; 												"[^[:alpha:]]"
-;; 												"[']"
-;; 												t
-;; 												("-d" "en_US")
-;; 												nil
-;; 												utf-8))
-;;   (add-hook 'prog-mode-hook 'spellCheckOntheFlyProg))
 
 ;; (url-encode-url "https://google.com/this   is a url")
 ;; (url-hexify-string
