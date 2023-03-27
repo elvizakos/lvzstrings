@@ -1,3 +1,14 @@
+2023-03-27  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* VERSION set to 2.3.13
+
+	* lvzstrings-mode.el (lvzstrings/dictionary-command): Add option for setting the dictionary shell command.
+	(lvzstrings/lvzstrings-dictionary-keycomb): Add option for the keycombination for searching the selected word in dictionary.
+	(lvzstrings/dictionary): Add method for searching the selected word in dictionary.
+	(lvzstrings-mode): Add key combination for dictionary.
+	(lvzstrings-mode): Add menu item for dictionary on lighter.
+	(lvzstrings-mode): Add menu item for dictionary under tools/lvzstrings menu
+
 2022-10-03  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* VERSION set to 2.2.11
