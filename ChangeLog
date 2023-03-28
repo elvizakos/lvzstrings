@@ -1,5 +1,13 @@
 2023-03-28  elvizakos  <elvizakos@debian-new-thinkpad>
 
+	* VERSION set to 2.4.16
+
+	* lvzstrings-mode.el (lvzstrings-mode): Add "Language" submenu under tools menu.
+	(lvzstrings-mode): Add "Flyspell" submenu under "Language" under tools menu.
+	(lvzstrings-mode): Add flyspell items under tools > Language > Flyspell.
+	(lvzstrings-mode): Add "Languagetool" submenu under tools > Language.
+	(lvzstrings-mode): Add language tools items under tools > Languages > Languagetool.
+
 	* VERSION set to 2.4.15
 
 	* lvzstrings-mode.el (lvzstrings-mode): Fix dictionary menu item under tools/lvzstrings menu.
