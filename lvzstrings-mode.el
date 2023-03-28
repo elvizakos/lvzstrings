@@ -110,6 +110,34 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
+(defcustom lvzstrings/lvzstrings-spellcheck-region-keycomb "C-c C-v ," "Default key combination for spell checking the region."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb "C-c C-v [" " Default key combination for moving to next error for flyspell."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-spellcheck-correct-word-keycomb "C-c C-v ]" "Default key combination for correcting current word."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-check-keycomb "C-c C-v ;" "Default key combination for checking document using language tool."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-goto-next-error-keycomb "C-c C-v :" "Default key combination for moving to next error language tool found."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-correct-buffer-keycomb "C-c C-v '" "Default key combination for correcting the buffer using language tool."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-check-done-keycomb "C-c C-v \"" "Defualt key combination for ending checking process with language tool."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
 (defgroup lvzstrings/lvzregexes nil "LVzStrings minor mode regular exressions settings."
   :group 'tools)
 
@@ -396,6 +424,25 @@
   :lighter lvzstrings/lighter
   :keymap (let ((lvzstringsmap (make-sparse-keymap)))
 
+			(if (> emacs-major-version 23) (progn
+											 (with-eval-after-load "ispell"
+
+											   (require 'flyspell)
+											   (add-hook 'text-mode-hook 'flyspell-mode)
+											   (add-hook 'org-mode-hook 'flyspell-mode)
+
+											   (setq ispell-program-name "hunspell")		   ; Φόρτωση του hunspell για έλεγχο ορθογραφίας
+											   (setq ispell-dictionary "en_US") ; Φόρτωση αγγλικών, ελληνικών και γερμανικών λεξικών
+											   (setq ispell-local-dictionary "en_US,el_GR,de_DE")
+											   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,el_GR,de_DE") nil utf-8)))
+											   (ispell-set-spellchecker-params)
+											   (if (> emacs-major-version 24)			   ; Η συνάρτηση "ispell-hunspell-add-multi-dic" δεν υπάρχει σε παλιότερες εκδόσεις του emacs
+												   (ispell-hunspell-add-multi-dic ispell-dictionary))
+											   (ispell-change-dictionary ispell-dictionary)
+
+											   (add-hook 'prog-mode-hook 'lvzstrings/spellCheckOntheFlyProg))
+											 ))
+
 			;; Menu under Tools
 			(define-key-after global-map [menu-bar tools lvzstringstmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "major modes")) 'kill-buffer )
@@ -461,7 +508,7 @@
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
 
-			(define-key global-map [menu-bar tools lvzstringsmenu lvzstringsmenudictionary]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudictionary]
 			  '("Dictionary" . lvzstrings/dictionary))
 
 			;;;;;;;;
@@ -528,13 +575,43 @@
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspellcheck]  ; Spellcheck current buffer
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage] ; Submenu for tools about language
+			  (cons "Language" (make-sparse-keymap "language")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell] ; Submenu for the spell checker
+			  (cons "Flyspell" (make-sparse-keymap "flyspell")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcheck]  ; Spellcheck current buffer
 			  '("Spellcheck buffer" . lvzstrings/spellcheck))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutranslate] ; Translate selected text
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcheckregion]  ; Spellcheck active region
+			  '("Spellcheck region" . flyspell-region))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellnexterror]  ; Spellcheck goto next error
+			  '("Go to next error" . flyspell-goto-next-error))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcorrect]  ; Spellcheck correct word
+			  '("Correct word" . flyspell-correct-word-before-point))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool]
+			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcheck]
+			  '("Check document" . langtool-check))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolnexterror]
+			  '("Next error" . langtool-goto-next-error))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcorrectbuffer]
+			  '("Correct buffer" . langtool-correct-buffer))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetooldone]
+			  '("End process" . langtool-check-done))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudictionary] ; Dictionary
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenudictionary] ; Dictionary
 			  '("Dictionary" . lvzstrings/dictionary))
 
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
@@ -577,9 +654,19 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-indent-keycomb) 'lvzstrings/indent)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-unindent-keycomb) 'lvzstrings/unindent)
 
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-translate-keycomb) 'lvzstrings/translate-region)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-dictionary-keycomb) 'lvzstrings/dictionary)
+
+			(require 'langtool)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-keycomb) 'langtool-check)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-correct-buffer-keycomb) 'langtool-correct-buffer)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-done-keycomb) 'langtool-check-done)
+
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-region-keycomb) 'flyspell-region)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb) 'flyspell-goto-next-error)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-correct-word-keycomb) 'flyspell-correct-word-before-point)
 
 			lvzstrings/lvzstrings-keymap)
   :global 1
