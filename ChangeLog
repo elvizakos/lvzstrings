@@ -1,5 +1,28 @@
 2023-03-28  elvizakos  <elvizakos@debian-new-thinkpad>
 
+	* VERSION set to 2.4.15
+
+	* lvzstrings-mode.el (lvzstrings-mode): Fix dictionary menu item under tools/lvzstrings menu.
+	Add keycombination for checking document using language-tool.
+	(lvzstrings-mode): Add key combination for moving to the next error that language tool has found.
+	(lvzstrings-mode): Add key combination for correcting buffer using language tool.
+	(lvzstrings-mode): Add key combination for ending language tool process.
+	(lvzstrings/lvzstrings-spellcheck-keycomb): Add option for key combination for starting the language tool process.
+	(lvzstrings/lvzstrings-langtool-goto-next-error-keycomb): Add option for key combination for moving to the next error that language tool found.
+	(lvzstrings/lvzstrings-langtool-correct-buffer-keycomb): Add option for key combination for correcting the buffer using language tool.
+	(lvzstrings/lvzstrings-langtool-check-done-keycomb): Add option for key combination for ending the language tool process.
+	(lvzstrings/lvzstrings-spellcheck-region-keycomb): Add  option for key combination for spellchecking region.
+	(lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb): Add option for key combination for moving to next error for flyspell.
+	(lvzstrings/lvzstrings-spellcheck-correct-word-keycomb): Add option for key combination for correcting word at point.
+	(lvzstrings-mode): Add key combination for spellchecking region.
+	(lvzstrings-mode): Add key combination for moving to next error flyspell found.
+	(lvzstrings-mode): Add key combination for correcting word at point using flyspell.
+	(lvzstrings-mode): Add submenu on lighter for all tools about language.
+	(lvzstrings-mode): Add submenu under "Language" on lighter, named "Languagetool".
+	(lvzstrings-mode): Add items of languagetool under "Languagetool" on lighter.
+	(lvzstrings-mode): Add submenu under "language" on lighter, named "Flyspell".
+	(lvzstrings-mode): Add items of flyspell under "Flyspell" on lighter.
+
 	* VERSION set to 2.3.14
 
 	* lvzstrings-mode.el (lvzstrings/translate-command): Add option for setting the translation shell command.
