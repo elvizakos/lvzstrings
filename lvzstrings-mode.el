@@ -502,13 +502,43 @@
 
 			(define-key global-map [menu-bar tools lvzstringstmenu tseparator0] '("--"))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutspellcheck]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage]
+			  (cons "Language" (make-sparse-keymap "language")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell]
+			  (cons "Flyspell" (make-sparse-keymap "flyspell")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcheck]
 			  '("Spellcheck buffer" . lvzstrings/spellcheck))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcheckregion]
+			  '("Spellcheck region" . flyspell-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellnexterror]
+			  '("Go to next error" . flyspell-goto-next-error))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcorrect]
+			  '("Correct word" . flyspell-correct-word-before-point))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool]
+			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcheck]
+			  '("Check document" . langtool-check))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolnexterror]
+			  '("Next error" . langtool-goto-next-error))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcorrectbuffer]
+			  '("Correct buffer" . langtool-correct-buffer))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetooldone]
+			  '("End process" . langtool-check-done))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudictionary]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenudictionary]
 			  '("Dictionary" . lvzstrings/dictionary))
 
 			;;;;;;;;
