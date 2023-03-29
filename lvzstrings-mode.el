@@ -58,39 +58,39 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-trim-spaces-keycomb "C-c C-t t" "Default key combination for removing beginning and ending spaces from selection."
+(defcustom lvzstrings/lvzstrings-trim-spaces-keycomb "C-c C-v t t" "Default key combination for removing beginning and ending spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-ltrim-spaces-keycomb "C-c C-t l" "Default key combination for removing beginning spaces from selection."
+(defcustom lvzstrings/lvzstrings-ltrim-spaces-keycomb "C-c C-v t l" "Default key combination for removing beginning spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-rtrim-spaces-keycomb "C-c C-t r" "Default key combination for removing ending spaces from selection."
+(defcustom lvzstrings/lvzstrings-rtrim-spaces-keycomb "C-c C-v t r" "Default key combination for removing ending spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-base64-encode-keycomb "C-c C-b e" "Default key combination for encoding selected string to base64."
+(defcustom lvzstrings/lvzstrings-base64-encode-keycomb "C-c C-v b e" "Default key combination for encoding selected string to base64."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-base64-decode-keycomb "C-c C-b d" "Default key combination for decoding base64 encoded selected string."
+(defcustom lvzstrings/lvzstrings-base64-decode-keycomb "C-c C-v b d" "Default key combination for decoding base64 encoded selected string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-url-encode-keycomb "C-c C-u e" "Default key combination for encoding selected string for use in a url."
+(defcustom lvzstrings/lvzstrings-url-encode-keycomb "C-c C-v u e" "Default key combination for encoding selected string for use in a url."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-url-decode-keycomb "C-c C-u d" "Default key combination for decoding selected url encoded string."
+(defcustom lvzstrings/lvzstrings-url-decode-keycomb "C-c C-v u d" "Default key combination for decoding selected url encoded string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-html-encode-keycomb "C-c M-h e" "Default key combination for encoding selected string for use in html."
+(defcustom lvzstrings/lvzstrings-html-encode-keycomb "C-c C-v h e" "Default key combination for encoding selected string for use in html."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-html-decode-keycomb "C-c M-h d" "Default key combination for decoding html entities in selected string."
+(defcustom lvzstrings/lvzstrings-html-decode-keycomb "C-c C-v h d" "Default key combination for decoding html entities in selected string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
