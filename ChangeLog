@@ -1,3 +1,20 @@
+2023-03-29  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* README.md: Section for shortcuts.
+	Add help on shortcuts that encode/decode html, url and base64.
+	Add help on shortcuts that trimm strings.
+	Add help on shortcuts that move lines.
+
+	* lvzstrings-mode.el (lvzstrings/lvzstrings-html-decode-keycomb): Change default key combination from "C-c M-h d" to "C-c C-v h d".
+	(lvzstrings/lvzstrings-html-encode-keycomb): Change default key combination from "C-c M-h e" to "C-c C-v h e".
+	(lvzstrings/lvzstrings-url-encode-keycomb): Change default key combination from "C-c C-u e" to "C-c C-v u e".
+	(lvzstrings/lvzstrings-url-decode-keycomb): Change default key combination from "C-c C-u d" to "C-c C-v u d".
+	(lvzstrings/lvzstrings-base64-decode-keycomb): Change default key combination from "C-c C-b d" to "C-c C-v b d".
+	(lvzstrings/lvzstrings-base64-encode-keycomb): Change default key combination from "C-c C-b e" to "C-c C-v b e".
+	(lvzstrings/lvzstrings-rtrim-spaces-keycomb): Change default key combination from "C-c C-t r" to "C-c C-v t r".
+	(lvzstrings/lvzstrings-ltrim-spaces-keycomb): Change default key combination from "C-c C-t l" to "C-c C-v t l".
+	(lvzstrings/lvzstrings-trim-spaces-keycomb): Change default key combination from "C-c C-t t" to "C-c C-v t t".
+
 2023-03-28  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* VERSION set to 2.4.16
