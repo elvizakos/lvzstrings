@@ -1,4 +1,4 @@
-VERSION:=2.2.12
+VERSION:=2.4.16
 PACKAGE_NAME:=lvzstrings-mode-$(VERSION)
 PACKAGE_DIR:=/tmp/$(PACKAGE_NAME)
 
@@ -9,10 +9,10 @@ $(PACKAGE_DIR):
 	mkdir $@
 	echo "" > lvzstrings-mode-autoloads
 	cp -r ./* $@
-	sed -re "s/VERSION/$(VERSION)/" $@/lvzstrings-mode-pkg.el > $@/"~tmp~"
+	sed -re "s/VERSION/$(VERSION)/g" $@/lvzstrings-mode-pkg.el > $@/"~tmp~"
 	mv $@/"~tmp~" $@/lvzstrings-mode-pkg.el
-	sed -re 's/;; Version: %%VERSION%%/;; Version: '"$(VERSION)"'/' $@/lvzstrings-mode.el > $@/"~tmp~"
-	sed -re 's/\(defconst lvzstrings-version \"%%VERSION%%\"/\(defconst lvzstrings-version "'"$(VERSION)"'"/' $@/"~tmp~" > $@/lvzstrings-mode.el
+	sed -re 's/%%VERSION%%/'"$(VERSION)"'/g' $@/lvzstrings-mode.el > $@/"~tmp~"
+	sed -re 's/\(defconst lvzstrings-version \"%%VERSION%%\"/\(defconst lvzstrings-version "'"$(VERSION)"'"/g' $@/"~tmp~" > $@/lvzstrings-mode.el
 	rm $@/"~tmp~"
 
 install:

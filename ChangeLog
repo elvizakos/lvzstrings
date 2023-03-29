@@ -1,3 +1,68 @@
+2023-03-29  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* README.md: Section for shortcuts.
+	Add help on shortcuts that encode/decode html, url and base64.
+	Add help on shortcuts that trimm strings.
+	Add help on shortcuts that move lines.
+
+	* lvzstrings-mode.el (lvzstrings/lvzstrings-html-decode-keycomb): Change default key combination from "C-c M-h d" to "C-c C-v h d".
+	(lvzstrings/lvzstrings-html-encode-keycomb): Change default key combination from "C-c M-h e" to "C-c C-v h e".
+	(lvzstrings/lvzstrings-url-encode-keycomb): Change default key combination from "C-c C-u e" to "C-c C-v u e".
+	(lvzstrings/lvzstrings-url-decode-keycomb): Change default key combination from "C-c C-u d" to "C-c C-v u d".
+	(lvzstrings/lvzstrings-base64-decode-keycomb): Change default key combination from "C-c C-b d" to "C-c C-v b d".
+	(lvzstrings/lvzstrings-base64-encode-keycomb): Change default key combination from "C-c C-b e" to "C-c C-v b e".
+	(lvzstrings/lvzstrings-rtrim-spaces-keycomb): Change default key combination from "C-c C-t r" to "C-c C-v t r".
+	(lvzstrings/lvzstrings-ltrim-spaces-keycomb): Change default key combination from "C-c C-t l" to "C-c C-v t l".
+	(lvzstrings/lvzstrings-trim-spaces-keycomb): Change default key combination from "C-c C-t t" to "C-c C-v t t".
+
+2023-03-28  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* VERSION set to 2.4.16
+
+	* lvzstrings-mode.el (lvzstrings-mode): Add "Language" submenu under tools menu.
+	(lvzstrings-mode): Add "Flyspell" submenu under "Language" under tools menu.
+	(lvzstrings-mode): Add flyspell items under tools > Language > Flyspell.
+	(lvzstrings-mode): Add "Languagetool" submenu under tools > Language.
+	(lvzstrings-mode): Add language tools items under tools > Languages > Languagetool.
+
+	* VERSION set to 2.4.15
+
+	* lvzstrings-mode.el (lvzstrings-mode): Fix dictionary menu item under tools/lvzstrings menu.
+	Add keycombination for checking document using language-tool.
+	(lvzstrings-mode): Add key combination for moving to the next error that language tool has found.
+	(lvzstrings-mode): Add key combination for correcting buffer using language tool.
+	(lvzstrings-mode): Add key combination for ending language tool process.
+	(lvzstrings/lvzstrings-spellcheck-keycomb): Add option for key combination for starting the language tool process.
+	(lvzstrings/lvzstrings-langtool-goto-next-error-keycomb): Add option for key combination for moving to the next error that language tool found.
+	(lvzstrings/lvzstrings-langtool-correct-buffer-keycomb): Add option for key combination for correcting the buffer using language tool.
+	(lvzstrings/lvzstrings-langtool-check-done-keycomb): Add option for key combination for ending the language tool process.
+	(lvzstrings/lvzstrings-spellcheck-region-keycomb): Add  option for key combination for spellchecking region.
+	(lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb): Add option for key combination for moving to next error for flyspell.
+	(lvzstrings/lvzstrings-spellcheck-correct-word-keycomb): Add option for key combination for correcting word at point.
+	(lvzstrings-mode): Add key combination for spellchecking region.
+	(lvzstrings-mode): Add key combination for moving to next error flyspell found.
+	(lvzstrings-mode): Add key combination for correcting word at point using flyspell.
+	(lvzstrings-mode): Add submenu on lighter for all tools about language.
+	(lvzstrings-mode): Add submenu under "Language" on lighter, named "Languagetool".
+	(lvzstrings-mode): Add items of languagetool under "Languagetool" on lighter.
+	(lvzstrings-mode): Add submenu under "language" on lighter, named "Flyspell".
+	(lvzstrings-mode): Add items of flyspell under "Flyspell" on lighter.
+
+	* VERSION set to 2.3.14
+
+	* lvzstrings-mode.el (lvzstrings/translate-command): Add option for setting the translation shell command.
+
+2023-03-27  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* VERSION set to 2.3.13
+
+	* lvzstrings-mode.el (lvzstrings/dictionary-command): Add option for setting the dictionary shell command.
+	(lvzstrings/lvzstrings-dictionary-keycomb): Add option for the keycombination for searching the selected word in dictionary.
+	(lvzstrings/dictionary): Add method for searching the selected word in dictionary.
+	(lvzstrings-mode): Add key combination for dictionary.
+	(lvzstrings-mode): Add menu item for dictionary on lighter.
+	(lvzstrings-mode): Add menu item for dictionary under tools/lvzstrings menu
+
 2022-10-03  elvizakos  <elvizakos@ubuntu.lvzhome.lan>
 
 	* VERSION set to 2.2.11

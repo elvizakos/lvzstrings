@@ -27,6 +27,14 @@
   :type 'string
   :group 'lvzstrings)
 
+(defcustom lvzstrings/translate-command "/usr/bin/trans %s %s:%s %s" "Shell command to use for translate."
+  :type 'string
+  :group 'lvzstrings)
+
+(defcustom lvzstrings/dictionary-command "/usr/bin/sdcv %s" "Shell command of the dictionary."
+  :type 'string
+  :group 'lvzstrings)
+
 (defgroup lvzstrings/lvzstrings-keys nil "LVzStrings minor mode key settings."
   :group 'tools)
 
@@ -50,39 +58,39 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-trim-spaces-keycomb "C-c C-t t" "Default key combination for removing beginning and ending spaces from selection."
+(defcustom lvzstrings/lvzstrings-trim-spaces-keycomb "C-c C-v t t" "Default key combination for removing beginning and ending spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-ltrim-spaces-keycomb "C-c C-t l" "Default key combination for removing beginning spaces from selection."
+(defcustom lvzstrings/lvzstrings-ltrim-spaces-keycomb "C-c C-v t l" "Default key combination for removing beginning spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-rtrim-spaces-keycomb "C-c C-t r" "Default key combination for removing ending spaces from selection."
+(defcustom lvzstrings/lvzstrings-rtrim-spaces-keycomb "C-c C-v t r" "Default key combination for removing ending spaces from selection."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-base64-encode-keycomb "C-c C-b e" "Default key combination for encoding selected string to base64."
+(defcustom lvzstrings/lvzstrings-base64-encode-keycomb "C-c C-v b e" "Default key combination for encoding selected string to base64."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-base64-decode-keycomb "C-c C-b d" "Default key combination for decoding base64 encoded selected string."
+(defcustom lvzstrings/lvzstrings-base64-decode-keycomb "C-c C-v b d" "Default key combination for decoding base64 encoded selected string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-url-encode-keycomb "C-c C-u e" "Default key combination for encoding selected string for use in a url."
+(defcustom lvzstrings/lvzstrings-url-encode-keycomb "C-c C-v u e" "Default key combination for encoding selected string for use in a url."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-url-decode-keycomb "C-c C-u d" "Default key combination for decoding selected url encoded string."
+(defcustom lvzstrings/lvzstrings-url-decode-keycomb "C-c C-v u d" "Default key combination for decoding selected url encoded string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-html-encode-keycomb "C-c M-h e" "Default key combination for encoding selected string for use in html."
+(defcustom lvzstrings/lvzstrings-html-encode-keycomb "C-c C-v h e" "Default key combination for encoding selected string for use in html."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-html-decode-keycomb "C-c M-h d" "Default key combination for decoding html entities in selected string."
+(defcustom lvzstrings/lvzstrings-html-decode-keycomb "C-c C-v h d" "Default key combination for decoding html entities in selected string."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
@@ -94,7 +102,39 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
+(defcustom lvzstrings/lvzstrings-dictionary-keycomb "C-c C-v C-w" "Default key combination for searching the word in the dictionary."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
 (defcustom lvzstrings/lvzstrings-spellcheck-keycomb "C-c C-v C-g" "Default key combination for spell checking the current buffer."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-spellcheck-region-keycomb "C-c C-v ," "Default key combination for spell checking the region."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb "C-c C-v [" " Default key combination for moving to next error for flyspell."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-spellcheck-correct-word-keycomb "C-c C-v ]" "Default key combination for correcting current word."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-check-keycomb "C-c C-v ;" "Default key combination for checking document using language tool."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-goto-next-error-keycomb "C-c C-v :" "Default key combination for moving to next error language tool found."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-correct-buffer-keycomb "C-c C-v '" "Default key combination for correcting the buffer using language tool."
+  :type 'string
+  :group 'lvzstrings/lvzstrings-keys)
+
+(defcustom lvzstrings/lvzstrings-langtool-check-done-keycomb "C-c C-v \"" "Defualt key combination for ending checking process with language tool."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
@@ -290,7 +330,7 @@
 
 (defun lvzstrings/translate-region (start end) "Function to translate region. This function just runs the \"trans\" command."
 	   (interactive "r")
-	   (let ((cmdstr "/usr/bin/trans %s %s:%s %s")
+	   (let ((cmdstr lvzstrings/translate-command)
 			 (options "-show-original n -show-original-phonetics n -show-translation Y -show-translation-phonetics n -show-prompt-message n -show-languages n -show-original-dictionary n -show-dictionary n -show-alternatives n")
 			 (inlang "")
 			 (outlang "el")
@@ -351,11 +391,57 @@
   (flyspell-mode 1)
   (flyspell-prog-mode))
 
+(defun lvzstrings/dictionary (start end) "Function for creating new buffer with the definitions of the selected word."
+	   (interactive "r")
+	   (let ((dictcmd lvzstrings/dictionary-command)
+			 (txt (json-encode-string (buffer-substring-no-properties start end)))
+			 ($buff nil)
+			 (dictionary-keymap nil)
+			 )
+		 
+		 (if (region-active-p) (progn
+								 (setq $buff (generate-new-buffer "*Dictionary*")
+									   dictionary-keymap (make-sparse-keymap))
+
+								 (switch-to-buffer $buff)
+								 (insert (shell-command-to-string (format dictcmd txt)))
+								 (font-lock-mode 1)
+								 (use-local-map dictionary-keymap)
+
+								 (define-key dictionary-keymap (kbd "q") (lambda()
+																		   (interactive)
+																		   (kill-buffer)
+																		   ))
+								 (read-only-mode 1)
+								 (goto-char 0)
+								 )
+		   (error "There must be a selection"))
+		 ))
+
 ;;---- MINOR MODE ------------------------------------------------------------------
 
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
   :lighter lvzstrings/lighter
   :keymap (let ((lvzstringsmap (make-sparse-keymap)))
+
+			(if (> emacs-major-version 23) (progn
+											 (with-eval-after-load "ispell"
+
+											   (require 'flyspell)
+											   (add-hook 'text-mode-hook 'flyspell-mode)
+											   (add-hook 'org-mode-hook 'flyspell-mode)
+
+											   (setq ispell-program-name "hunspell")		   ; Φόρτωση του hunspell για έλεγχο ορθογραφίας
+											   (setq ispell-dictionary "en_US") ; Φόρτωση αγγλικών, ελληνικών και γερμανικών λεξικών
+											   (setq ispell-local-dictionary "en_US,el_GR,de_DE")
+											   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,el_GR,de_DE") nil utf-8)))
+											   (ispell-set-spellchecker-params)
+											   (if (> emacs-major-version 24)			   ; Η συνάρτηση "ispell-hunspell-add-multi-dic" δεν υπάρχει σε παλιότερες εκδόσεις του emacs
+												   (ispell-hunspell-add-multi-dic ispell-dictionary))
+											   (ispell-change-dictionary ispell-dictionary)
+
+											   (add-hook 'prog-mode-hook 'lvzstrings/spellCheckOntheFlyProg))
+											 ))
 
 			;; Menu under Tools
 			(define-key-after global-map [menu-bar tools lvzstringstmenu]
@@ -416,11 +502,44 @@
 
 			(define-key global-map [menu-bar tools lvzstringstmenu tseparator0] '("--"))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutspellcheck]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage]
+			  (cons "Language" (make-sparse-keymap "language")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell]
+			  (cons "Flyspell" (make-sparse-keymap "flyspell")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcheck]
 			  '("Spellcheck buffer" . lvzstrings/spellcheck))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutranslate]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcheckregion]
+			  '("Spellcheck region" . flyspell-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellnexterror]
+			  '("Go to next error" . flyspell-goto-next-error))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcorrect]
+			  '("Correct word" . flyspell-correct-word-before-point))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool]
+			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcheck]
+			  '("Check document" . langtool-check))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolnexterror]
+			  '("Next error" . langtool-goto-next-error))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcorrectbuffer]
+			  '("Correct buffer" . langtool-correct-buffer))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetooldone]
+			  '("End process" . langtool-check-done))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenudictionary]
+			  '("Dictionary" . lvzstrings/dictionary))
 
 			;;;;;;;;
 			(define-key-after		 ; Menu for LVzStrings mode
@@ -486,11 +605,44 @@
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspellcheck]  ; Spellcheck current buffer
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage] ; Submenu for tools about language
+			  (cons "Language" (make-sparse-keymap "language")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell] ; Submenu for the spell checker
+			  (cons "Flyspell" (make-sparse-keymap "flyspell")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcheck]  ; Spellcheck current buffer
 			  '("Spellcheck buffer" . lvzstrings/spellcheck))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutranslate] ; Translate selected text
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcheckregion]  ; Spellcheck active region
+			  '("Spellcheck region" . flyspell-region))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellnexterror]  ; Spellcheck goto next error
+			  '("Go to next error" . flyspell-goto-next-error))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsflyspell lvzstringsmenuspellcorrect]  ; Spellcheck correct word
+			  '("Correct word" . flyspell-correct-word-before-point))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool]
+			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcheck]
+			  '("Check document" . langtool-check))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolnexterror]
+			  '("Next error" . langtool-goto-next-error))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcorrectbuffer]
+			  '("Correct buffer" . langtool-correct-buffer))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetooldone]
+			  '("End process" . langtool-check-done))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenudictionary] ; Dictionary
+			  '("Dictionary" . lvzstrings/dictionary))
 
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
 			;; (global-unset-key (kbd lvzstrings/lvzstrings-moveup-keycomb))
@@ -532,8 +684,19 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-indent-keycomb) 'lvzstrings/indent)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-unindent-keycomb) 'lvzstrings/unindent)
 
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-translate-keycomb) 'lvzstrings/translate-region)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-dictionary-keycomb) 'lvzstrings/dictionary)
+
+			(require 'langtool)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-keycomb) 'langtool-check)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-correct-buffer-keycomb) 'langtool-correct-buffer)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-done-keycomb) 'langtool-check-done)
+
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-region-keycomb) 'flyspell-region)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-goto-next-error-keycomb) 'flyspell-goto-next-error)
+			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-correct-word-keycomb) 'flyspell-correct-word-before-point)
 
 			lvzstrings/lvzstrings-keymap)
   :global 1
@@ -544,35 +707,6 @@
 (lvzstrings-mode 1)
 
 (provide 'lvzstrings-mode)
-
-(with-eval-after-load "ispell" ;; Φόρτωση του hunspell και λεξικών (en_US,el_GR,de_DE)
-  (add-to-list 'ispell-local-dictionary-alist '("greek-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "el_GR")
-												nil
-												utf-8))
-
-  (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "de_DE")
-												nil
-												utf-8))
-
-  (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-												"[[:alpha:]]"
-												"[^[:alpha:]]"
-												"[']"
-												t
-												("-d" "en_US")
-												nil
-												utf-8))
-  (add-hook 'prog-mode-hook 'spellCheckOntheFlyProg))
 
 ;; (url-encode-url "https://google.com/this   is a url")
 ;; (url-hexify-string
