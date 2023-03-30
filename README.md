@@ -67,13 +67,56 @@ This can also be installed by adding somewhere in emacs init file the following 
 
 Encode string for use in HTML code:
 
-<kbd>C-c C-v h d</kbd>
-<kbd>C-c C-v h e</kbd>
+Selecting the text <kbd>To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;</kbd> and pressing <kbd>C-c C-v h e</kbd> will result to:
+
+```html
+To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;
+```
+
+Decoding html entities:
+
+Selecting the text
+`&amp;lt;b&amp;gt;Bold text&amp;lt;/b&amp;gt;, &amp;lt;i&amp;gt;italic text&amp;lt;/i&amp;gt;`
+and pressing <kbd>C-c C-v h d</kbd> will result to:
+
+```html
+<b>Bold text</b>, <i>italic text</i>
+```
 
 #### Encode/Decode URL ####
 
-<kbd>C-c C-v u e</kbd>
-<kbd>C-c C-v u d</kbd>
+Encoding strings for use in URLs:
+
+To encode a string that contains restricted characters, one can select that string and
+use the <kbd>C-c C-v u e</kbd> key combination.
+
+For example the string:
+`https://www.youtube.com/watch?v=XmttZ-BnwaI`
+
+will become:
+`https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXmttZ-BnwaI`
+
+Extracting original URL from googles result URLs:
+
+On the following URL:
+`https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiH1-PEoIP-AhUF3aQKHcZkD_kQwqsBegQIChAB&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXmttZ-BnwaI&usg=AOvVaw1Mzp0sb9VJ4xFQiZ60vID9`
+
+using this sequence
+
+1. <kbd>C-s &url=</kbd>
+2. <kbd>C-SPC</kbd>
+3. <kbd>C-s &</kbd>
+4. <kbd>C-b</kbd>
+5. <kbd>M-w</kbd>
+7. <kbd>C-a</kbd>
+8. <kbd>C-o</kbd>
+9. <kbd>C-y</kbd>
+10.<kbd>C-SPC</kbd>
+11.<kbd>C-a</kbd>
+12.<kbd>C-c C-v u d</kbd>
+
+it will add a new line containing the extracted URL:
+`https://www.youtube.com/watch?v=XmttZ-BnwaI`
 
 #### Encode/Decode Base64 ####
 
