@@ -119,9 +119,9 @@ using this sequence
 7. <kbd>C-a</kbd>
 8. <kbd>C-o</kbd>
 9. <kbd>C-y</kbd>
-10.<kbd>C-SPC</kbd>
-11.<kbd>C-a</kbd>
-12.<kbd>C-c C-v u d</kbd>
+10. <kbd>C-SPC</kbd>
+11. <kbd>C-a</kbd>
+12. <kbd>C-c C-v u d</kbd>
 
 it will add a new line containing the extracted URL:
 `https://www.youtube.com/watch?v=XmttZ-BnwaI`
