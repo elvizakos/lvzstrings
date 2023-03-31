@@ -1,3 +1,7 @@
+2023-03-31  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* README.md: Add headings in HTML and URL examples.
+
 2023-03-30  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* README.md: Add examples for encoding/decoding HTML and URL.
