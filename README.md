@@ -15,8 +15,15 @@ lvzstrings-mode is a minor mode for working with text on emacs.
     - [Usage](#usage)
         - [Examples](#examples)
             - [Encode/Decode HTML](#encodedecode-html)
+                - [Encode string for use in HTML code](#encode-string-for-use-in-html-code)
+                - [Decoding html entities](#decoding-html-entities)
             - [Encode/Decode URL](#encodedecode-url)
+                - [Encoding strings for use in URLs](#encoding-strings-for-use-in-urls)
+                - [Extracting original URL from googles result URLs](#extracting-original-url-from-googles-result-urls)
             - [Encode/Decode Base64](#encodedecode-base64)
+                - [About BASE64](#about-base64)
+                - [Encode strings to BASE64](#encode-strings-to-base64)
+                - [Decode BASE64 encoded strings](#decode-base64-encoded-strings)
             - [Remove extra spaces](#remove-extra-spaces)
         - [Shortcuts](#shortcuts)
             - [Encoding/Decoding](#encodingdecoding)
@@ -65,15 +72,15 @@ This can also be installed by adding somewhere in emacs init file the following 
 
 #### Encode/Decode HTML ####
 
-Encode string for use in HTML code:
+##### Encode string for use in HTML code #####
 
-Selecting the text <kbd>To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;</kbd> and pressing <kbd>C-c C-v h e</kbd> will result to:
+Selecting the text `To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;` and pressing <kbd>C-c C-v h e</kbd> will result to:
 
 ```html
 To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;
 ```
 
-Decoding html entities:
+##### Decoding html entities #####
 
 Selecting the text
 `&amp;lt;b&amp;gt;Bold text&amp;lt;/b&amp;gt;, &amp;lt;i&amp;gt;italic text&amp;lt;/i&amp;gt;`
@@ -85,7 +92,7 @@ and pressing <kbd>C-c C-v h d</kbd> will result to:
 
 #### Encode/Decode URL ####
 
-Encoding strings for use in URLs:
+##### Encoding strings for use in URLs #####
 
 To encode a string that contains restricted characters, one can select that string and
 use the <kbd>C-c C-v u e</kbd> key combination.
@@ -95,8 +102,9 @@ For example the string:
 
 will become:
 `https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXmttZ-BnwaI`
+and it can be used in path of a URL or as a value in a URL argument.
 
-Extracting original URL from googles result URLs:
+##### Extracting original URL from googles result URLs #####
 
 On the following URL:
 `https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiH1-PEoIP-AhUF3aQKHcZkD_kQwqsBegQIChAB&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DXmttZ-BnwaI&usg=AOvVaw1Mzp0sb9VJ4xFQiZ60vID9`
@@ -119,6 +127,22 @@ it will add a new line containing the extracted URL:
 `https://www.youtube.com/watch?v=XmttZ-BnwaI`
 
 #### Encode/Decode Base64 ####
+
+##### About BASE64 #####
+
+The characters used by BASE64 are the numbers ( `0123456789` ), the upper and lower case characters of the latin alphabet
+( `ABCDeFGHIJKLMNOPQRSTUVWXYZ` and `abcdefghijklmnopqrstuvwxyz` ) and the characters plus sing (`+`) and slash character
+(`/`). The equal sign character ( `=` ) is also used as a special character.
+
+##### Encode strings to BASE64 #####
+
+<b>[WARNING]: encoding to base64 is not an encryption and it shouldn't be used as such.</b>
+<b>[WARNING]: Because base64 uses the characters `+`, `/` and `=`, it's not safe to use
+it for parsing data in URLs. A BASE64 encoded string must also URL encoded.</b>
+
+To encode a string to using base64
+
+##### Decode BASE64 encoded strings #####
 
 <kbd>C-c C-v b e</kbd>
 <kbd>C-c C-v b d</kbd>
