@@ -1,3 +1,13 @@
+2023-04-04  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* README.md: Add examples for encoding/decoding using BASE64.
+	Add explanation on Trim usage and space removing usage.
+	Add explanation of moving, indenting and unindenting lines.
+
+2023-04-03  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* README.md: Do spell and syntax check and correction with flyspell and languagetool.
+
 2023-03-31  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* README.md: Add headings in HTML and URL examples.
