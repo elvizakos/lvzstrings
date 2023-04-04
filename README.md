@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/:license-gpl3-blue.svg)](./COPYING)
 
-lvzstrings-mode is a minor mode for working with text on emacs.
+lvzstrings-mode is a minor mode for working with text on Emacs.
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
@@ -16,7 +16,7 @@ lvzstrings-mode is a minor mode for working with text on emacs.
         - [Examples](#examples)
             - [Encode/Decode HTML](#encodedecode-html)
                 - [Encode string for use in HTML code](#encode-string-for-use-in-html-code)
-                - [Decoding html entities](#decoding-html-entities)
+                - [Decoding HTML entities](#decoding-html-entities)
             - [Encode/Decode URL](#encodedecode-url)
                 - [Encoding strings for use in URLs](#encoding-strings-for-use-in-urls)
                 - [Extracting original URL from googles result URLs](#extracting-original-url-from-googles-result-urls)
@@ -24,11 +24,17 @@ lvzstrings-mode is a minor mode for working with text on emacs.
                 - [About BASE64](#about-base64)
                 - [Encode strings to BASE64](#encode-strings-to-base64)
                 - [Decode BASE64 encoded strings](#decode-base64-encoded-strings)
-            - [Remove extra spaces](#remove-extra-spaces)
-        - [Shortcuts](#shortcuts)
-            - [Encoding/Decoding](#encodingdecoding)
-            - [Trimming strings (removing extra spaces)](#trimming-strings-removing-extra-spaces)
-            - [Move lines](#move-lines)
+            - [Remove spaces](#remove-spaces)
+                - [Trim, trim left and trim right spaces](#trim-trim-left-and-trim-right-spaces)
+                - [Remove multiple space characters](#remove-multiple-space-characters)
+                - [Toggle the whitespace-mode](#toggle-the-whitespace-mode)
+            - [Moving lines](#moving-lines)
+                - [Moving lines up/down](#moving-lines-updown)
+                - [Indenting / Unindenting](#indenting--unindenting)
+    - [Shortcuts](#shortcuts)
+        - [Encoding/Decoding](#encodingdecoding)
+        - [Trimming strings (removing extra spaces)](#trimming-strings-removing-extra-spaces)
+        - [Move lines](#move-lines)
 
 <!-- markdown-toc end -->
 
@@ -61,7 +67,7 @@ make install
 ```
 
 ### Simple installation ###
-This can also be installed by adding somewhere in emacs init file the following line:
+This can also be installed by adding somewhere in Emacs init file the following line:
 ```lisp
 (load "/path/to/lvzstrings-mode.el")
 ```
@@ -80,7 +86,7 @@ Selecting the text `To make a part of text bold, must put this text between &lt;
 To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;
 ```
 
-##### Decoding html entities #####
+##### Decoding HTML entities #####
 
 Selecting the text
 `&amp;lt;b&amp;gt;Bold text&amp;lt;/b&amp;gt;, &amp;lt;i&amp;gt;italic text&amp;lt;/i&amp;gt;`
@@ -130,70 +136,103 @@ it will add a new line containing the extracted URL:
 
 ##### About BASE64 #####
 
-The characters used by BASE64 are the numbers ( `0123456789` ), the upper and lower case characters of the latin alphabet
+The characters used by BASE64 are the numbers ( `0123456789` ), the upper and lower case characters of the Latin alphabet
 ( `ABCDeFGHIJKLMNOPQRSTUVWXYZ` and `abcdefghijklmnopqrstuvwxyz` ) and the characters plus sing (`+`) and slash character
 (`/`). The equal sign character ( `=` ) is also used as a special character.
 
 ##### Encode strings to BASE64 #####
 
-<b>[WARNING]: encoding to base64 is not an encryption and it shouldn't be used as such.</b>
+<b>[WARNING]: encoding to base64 is not an encryption, and it shouldn't be used as such.</b>
 <b>[WARNING]: Because base64 uses the characters `+`, `/` and `=`, it's not safe to use
 it for parsing data in URLs. A BASE64 encoded string must also URL encoded.</b>
 
-To encode a string to using base64
+To encode a string to Base64, select it and press <kbd>C-c C-v b e</kbd>.
+
+For example the following URL:
+
+`https://www.youtube.com/watch?v=UZjuzPU9UE4`
+
+will become:
+
+`aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1VWmp1elBVOVVFNA==`
 
 ##### Decode BASE64 encoded strings #####
 
-<kbd>C-c C-v b e</kbd>
-<kbd>C-c C-v b d</kbd>
+To decode a Base64 string, select it and press <kbd>C-c C-v b d</kbd>.
 
-#### Remove extra spaces ####
+For example the following:
 
-<kbd>C-c C-v t l</kbd>
-<kbd>C-c C-v t r</kbd>
-<kbd>C-c C-v t t</kbd>
-<kbd>C-c C-v SPC</kbd>
+`aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1sZ1NMejVGZVhVZw==`
 
-Selecting text 
+will become:
 
+`https://www.youtube.com/watch?v=lgSLz5FeXUg`
 
-```
-;; this is 	a    string
-```
+#### Remove spaces ####
 
-```
-;; this is 	a string
-```
-Notice that after "is" there is a space character and before "a" there is a tab character.
+##### Trim, trim left and trim right spaces #####
 
-### Shortcuts ###
+By selecting a region and hitting the keys <kbd>C-c C-v t l</kbd>, it
+will trim spaces on the beginning of each line in the region.
 
-#### Encoding/Decoding ####
+Hitting the keys <kbd>C-c C-v t r</kbd>, it will trim spaces on the
+end of each line in the region.
+
+Hitting the keys <kbd>C-c C-v t t</kbd>, it will trim spaces on the
+beginning and end of each line in the region.
+
+##### Remove multiple space characters #####
+
+Hitting the keys <kbd>C-c C-v SPC</kbd>, it will delete multiple
+continued spaces letting only one.
+
+##### Toggle the whitespace-mode  #####
+
+Hitting the keys <kbd>C-c C-v C-SPC</kbd>, it will toggle the
+whitespace-mode on/off.
+
+#### Moving lines ####
+
+##### Moving lines up/down #####
+
+Holding down the Meta and Super keys and pressing the Up or Down arrow
+keys, it will move the current line, or if the region is active, the
+lines in the region Up or Down in document.
+
+##### Indenting / Unindenting #####
+
+Holding down the Meta and Super keys and pressing the Right or Left
+arrow keys, it will indent or unindent the current line, or if the
+region is active, the lines in the region.
+
+## Shortcuts ##
+
+### Encoding/Decoding ###
 
 | Key                    | Command / Function      | Universal argument | Description                                                                                 |
 |------------------------|-------------------------|--------------------|---------------------------------------------------------------------------------------------|
-| <kbd>C-c C-v h e</kbd> | `lvzstrings/htmlencode` |                    | Encodes selection for use in HTML code. For example, the "&lt;" will become  "&amp;lt;".    |
+| <kbd>C-c C-v h e</kbd> | `lvzstrings/htmlencode` |                    | Encodes selection for use in HTML code. For example, the "&lt;" will become "&amp;lt;".     |
 | <kbd>C-c C-v h d</kbd> | `lvzstrings/htmldecode` |                    | Decodes selection from HTML encoded characters. Example: the "&amp;lt;" will become "&lt;". |
 | <kbd>C-c C-v u e</kbd> | `lvzstrings/urlencode`  |                    | Encodes selection for use in a URL. For example, the "=" will become "%3D".                 |
-| <kbd>C-c C-v u d</kbd> | `lvzstrings/urldecode`  |                    | Decodes selected from URL encoded characters. For example the "%3D" will becode "=".        |
+| <kbd>C-c C-v u d</kbd> | `lvzstrings/urldecode`  |                    | Decodes selected from URL encoded characters. For example the "%3D" will become "=".        |
 | <kbd>C-c C-v b e</kbd> | `base64-encode-region`  |                    |                                                                                             |
 | <kbd>C-c C-v b d</kbd> | `base64-decode-region`  |                    |                                                                                             |
 
-#### Trimming strings (removing extra spaces) ####
+### Trimming strings (removing extra spaces) ###
 
 | Key                      | Command / Function    | Universal argument | Description                                                                 |
 |--------------------------|-----------------------|--------------------|-----------------------------------------------------------------------------|
 | <kbd>C-c C-v t l</kbd>   | `lvzstrings/ltrim`    |                    | Remove the spaces at the beginning (left) of the selection.                 |
-| <kbd>C-c C-v t r</kbd>   | `lvzstrings/rtrim`    |                    | Remove the spaces at the end (right ) of the selection.                     |
+| <kbd>C-c C-v t r</kbd>   | `lvzstrings/rtrim`    |                    | Remove the spaces at the end (right) of the selection.                      |
 | <kbd>C-c C-v t t</kbd>   | `lvzstrings/trim`     |                    | Remove the spaces at the beginning (left) and end (right) of the selection. |
 | <kbd>C-c C-v SPC</kbd>   | `lvzstrings/onespace` |                    | Where there are multiple spaces remove them and leave only one.             |
-| <kbd>C-c C-v C-SPC</kbd> | `whitespace-mode`     |                    | Toggle whilespace-mode on/off.                                              |
+| <kbd>C-c C-v C-SPC</kbd> | `whitespace-mode`     |                    | Toggle whitespace-mode on/off.                                              |
 
-#### Move lines ####
+### Move lines ###
 
-| Key                          | Command / Function          | Univerasl argument | Description                                            |
+| Key                          | Command / Function          | Universal argument | Description                                            |
 |------------------------------|-----------------------------|--------------------|--------------------------------------------------------|
-| <kbd>&lt;M-s-up&gt;</kbd>    | `lvzstrings/move-line-up`   |                    | Move up currect line or lines in selection.            |
+| <kbd>&lt;M-s-up&gt;</kbd>    | `lvzstrings/move-line-up`   |                    | Move up current line or lines in selection.            |
 | <kbd>&lt;M-s-down&gt;</kbd>  | `lvzstrings/move-line-down` |                    | Move down current line or lines in selection.          |
 | <kbd>&lt;M-s-right&gt;</kbd> | `lvzstrings/indent`         |                    | Increase indent of current line or lines in selection. |
 | <kbd>&lt;M-s-left&gt;</kbd>  | `lvzstrings/unindent`       |                    | Decrease indent of current line of lines in selection. |
