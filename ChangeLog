@@ -1,3 +1,14 @@
+2023-04-05  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* Version set to 2.5.17
+
+	* lvzstrings-mode.el (lvzstrings-mode): Create submenu in lighter for encodings/decodings.
+	(lvzstrings-mode): Create submenu in lighter under encodings/decodings for HTML and move HTML items under it.
+	(lvzstrings-mode): Create submenu in lighter under encodings/decodings for URL and move URL items under it.
+	(lvzstrings-mode): Create submenu in lighter under encodings/decodings for BASE64 and move BASE64 items under it.
+	(lvzstrings-mode): Create submenu in lighter for trimming spaces.
+	(lvzstrings-mode): Create submenu in lighter for moving lines and move the items for moving up/down lines and indent/unindent.
+
 2023-04-04  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* README.md: Add examples for encoding/decoding using BASE64.
