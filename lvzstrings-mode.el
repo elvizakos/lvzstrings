@@ -541,69 +541,79 @@
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenudictionary]
 			  '("Dictionary" . lvzstrings/dictionary))
 
-			;;;;;;;;
+			;;;;;;;; Lighter menu
 			(define-key-after		 ; Menu for LVzStrings mode
 			  lvzstrings/lvzstrings-keymap
 			  [menu-bar lvzstringsmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "lvzstrings mode"))
 			  'kill-buffer)
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodehtml]
-			  '("Decode HTML selection" . lvzstrings/htmldecode))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode] ; Submenu Encode/decode
+			  (cons "Encode/Decode" (make-sparse-keymap "encodedecode")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuencodehtml]
-			  '("Encode HTML selection" . lvzstrings/htmlencode))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodehtml] ; Submenu Encode/decode HTML
+			  (cons "HTML" (make-sparse-keymap "encodedecodehtml")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodeurl] ; decode url
-			  '("Decode URL selection" . lvzstrings/urldecode))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodehtml lvzstringsencodedecodehtmldecode]
+			  '("Decode selection" . lvzstrings/htmldecode))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuecodeurl] ; encode url
-			  '("Encode selection for use in URL" . lvzstrings/urlencode))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodehtml lvzstringsencodedecodehtmlencode]
+			  '("Encode selection" . lvzstrings/htmlencode))
 
-			;; (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator4] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodeurl] ; Submenu Encode/decode URL
+			  (cons "URL" (make-sparse-keymap "encodedecodeurl")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenudecodeb64] ; decode base64
-			  '("Decode a Base64 selection" . base64-decode-region))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodeurl lvzstringsencodedecodeurldecode] ; decode url
+			  '("Decode selection" . lvzstrings/urldecode))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuencodeb64] ; encode base64
-			  '("Encode selection to Base64" . base64-encode-region))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodeurl lvzstringsencodedecodeurlencode] ; encode url
+			  '("Encode selection" . lvzstrings/urlencode))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator4] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodebase64] ; Submenu Encode/decode BASE64
+			  (cons "BASE64" (make-sparse-keymap "encodedecodebase64")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenurtrim] ; rtrim spaces
-			  '("Remove spaces from ending of selection " . lvzstrings/rtrim))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodebase64 lvzstringsencodedecodebase64decode] ; decode base64
+			  '("Decode selection" . base64-decode-region))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenultrim] ; ltrim spaces
-			  '("Remove spaces from beginning of selection " . lvzstrings/ltrim))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsencodedecode lvzstringsencodedecodebase64 lvzstringsencodedecodebase64encode] ; encode base64
+			  '("Encode selection" . base64-encode-region))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenutrim] ; trim spaces
-			  '("Remove spaces from beginning and ending of selection " . lvzstrings/trim))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm] ; Submenu space trimming
+			  (cons "Remove spaces" (make-sparse-keymap "removespaces")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuremovespaces] ; remove spaces
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmrtrimm] ; rtrim spaces
+			  '("Remove spaces from ending of selection (right trim) " . lvzstrings/rtrim))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmltrimm] ; ltrim spaces
+			  '("Remove spaces from beginning of selection (left trim) " . lvzstrings/ltrim))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmtrimm] ; trim spaces
+			  '("Remove spaces from beginning and ending of selection (full trim) " . lvzstrings/trim))
+
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmremovespaces] ; remove spaces
 			  '("Remove unnecessary spaces" . lvzstrings/onespace))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator3] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmseparator1] '("--"))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuwhispacemode] ;enable/disable whitespace mode
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuspacetrimm lvzstringsmenuspacetrimmwhispacemode] ;enable/disable whitespace mode
 			  '("Enable/disable whitespace mode" . whitespace-mode))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator2] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove] ; Submenu moving lines
+			  (cons "Moving lines" (make-sparse-keymap "movinglines")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuunindent] ; unindent
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove lvzstringsmenulinemoveunindent] ; unindent
 			  '("Unindent line or selected lines" . lvzstrings/unindent))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenuindent] ; indent
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove lvzstringsmenulinemoveindent] ; indent
 			  '("Indent line or selected lines" . lvzstrings/indent))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator1] '("--"))
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove lvzstringsmenulinemoveseparator1] '("--"))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinedown] ; move line down
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove lvzstringsmenulinemovelinedown] ; move line down
 			  '("Move line Down" . lvzstrings/move-line-down))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulineup] ; move line up
+			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringsmenulinemove lvzstringsmenulinemovelineup] ; move line up
 			  '("Move line Up" . lvzstrings/move-line-up))
-
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu separator0] '("--"))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage] ; Submenu for tools about language
 			  (cons "Language" (make-sparse-keymap "language")))
