@@ -447,57 +447,71 @@
 			(define-key-after global-map [menu-bar tools lvzstringstmenu]
 			  (cons "LVzStrings" (make-sparse-keymap "major modes")) 'kill-buffer )
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodehtml]
-			  '("Decode HTML selection" . lvzstrings/htmldecode))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode] ; Submenu Encode/decode
+			  (cons "Encode/Decode" (make-sparse-keymap "encodedecode")))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodehtml]
-			  '("Encode HTML selection" . lvzstrings/htmlencode))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodehtml] ; Submenu Encode/decode HTML
+			  (cons "HTML" (make-sparse-keymap "encodedecodehtml")))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodeurl]
-			  '("Decode URL selection" . lvzstrings/urldecode))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodehtml lvzstringstmenuencodedecodehtmldecode]
+			  '("Decode selection" . lvzstrings/htmldecode))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuecodeurl]
-			  '("Encode selection for use in URL" . lvzstrings/urlencode))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodehtml lvzstringstmenuencodedecodehtmlencode]
+			  '("Encode selection" . lvzstrings/htmlencode))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenudecodeb64]
-			  '("Decode a Base64 selection" . base64-decode-region))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodeurl] ; Submenu Encode/decode URL
+			  (cons "URL" (make-sparse-keymap "encodedecodeurl")))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodeb64]
-			  '("Encode selection to Base64" . base64-encode-region))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodeurl lvzstringstmenuencodedecodeurldecode]
+			  '("Decode selection" . lvzstrings/urldecode))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu tseparator4] '("--"))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodeurl lvzstringstmenuencodedecodeurlencode]
+			  '("Encode selection" . lvzstrings/urlencode))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenurtrim]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodebase64] ; Submenu Encode/decode BASE64
+			  (cons "BASE64" (make-sparse-keymap "encodedecodebase64")))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodebase64 lvzstringstmenuencodedecodebase64decode]
+			  '("Decode selection" . base64-decode-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuencodedecode lvzstringstmenuencodedecodebase64 lvzstringstmenuencodedecodebase64encode]
+			  '("Encode selection" . base64-encode-region))
+
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm] ; Submenu space trimming
+			  (cons "Remove spaces" (make-sparse-keymap "removespaces")))
+
+			(define-key global-map  [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimmftrim]
 			  '("Remove spaces from ending of selection " . lvzstrings/rtrim))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenultrim]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimmltrim]
 			  '("Remove spaces from beginning of selection " . lvzstrings/ltrim))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenutrim]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimmrtrim]
 			  '("Remove spaces from beginning and ending of selection " . lvzstrings/trim))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuremovespaces]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimmrspace]
 			  '("Remove unnecessary spaces" . lvzstrings/onespace))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu tseparator3] '("--"))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimmsep1] '("--"))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuwhispacemode]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuspacetrimm lvzstringstmenuspacetrimwspmode]
 			  '("Enable/disable whitespace mode" . whitespace-mode))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu tseparator2] '("--"))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove] ; Submenu moving lines
+			  (cons "Moving lines" (make-sparse-keymap "movinglines")))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuunindent]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove lvzstringstmenuunindent]
 			  '("Unindent line or selected lines" . lvzstrings/unindent))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenuindent]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove lvzstringstmenuindent]
 			  '("Indent line or selected lines" . lvzstrings/indent))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu tseparator1] '("--"))
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove tseparator1] '("--"))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenumlinedown]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove lvzstringstmenumlinedown]
 			  '("Move line Down" . lvzstrings/move-line-down))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenumlineup]
+			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstmenulinemove lvzstringstmenumlineup]
 			  '("Move line Up" . lvzstrings/move-line-up))
 
 			(define-key global-map [menu-bar tools lvzstringstmenu tseparator0] '("--"))
