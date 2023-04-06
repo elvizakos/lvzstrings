@@ -1,3 +1,14 @@
+2023-04-06  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* Version set to 2.5.22
+
+	* lvzstrings-mode.el (lvzstrings-mode): Add submenu under lvzstrings in tools menu for encodings/decodings.
+	(lvzstrings-mode): Add submenu under lvzstrings in tools menu for encodings/decodings for HTML and move HTML items under it.
+	(lvzstrings-mode): Add submenu under lvzstrings in tools menu for encodings/decodings for URL and move URL items under it.
+	(lvzstrings-mode): Add submenu under lvzstrings in tools menu for encodings/decodings for BASE64 and move BASE64 items under it.
+	(lvzstrings-mode): Add submenu under lvzstrings in tools menu for trimming spaces and move all related items under it.
+	(lvzstrings-mode): Add submenu under lvzstrings in tools menu for moving lines and move the related items under it.
+
 2023-04-05  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* Version set to 2.5.17
