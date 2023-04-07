@@ -80,7 +80,7 @@ This can also be installed by adding somewhere in Emacs init file the following 
 
 ##### Encode string for use in HTML code #####
 
-Selecting the text `To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;` and pressing <kbd>C-c C-v h e</kbd> will result to:
+Selecting the text `To make a part of text bold, must put this text between <b></b>` and pressing <kbd>C-c C-v h e</kbd> will result to:
 
 ```html
 To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;
@@ -89,7 +89,7 @@ To make a part of text bold, must put this text between &lt;b&gt;&lt;/b&gt;
 ##### Decoding HTML entities #####
 
 Selecting the text
-`&amp;lt;b&amp;gt;Bold text&amp;lt;/b&amp;gt;, &amp;lt;i&amp;gt;italic text&amp;lt;/i&amp;gt;`
+`&lt;b&gt;Bold text&lt;/b&gt;, &lt;i&gt;italic text&lt;/i&gt;`
 and pressing <kbd>C-c C-v h d</kbd> will result to:
 
 ```html
