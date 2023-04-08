@@ -1,3 +1,9 @@
+2023-04-08  elvizakos  <elvizakos@debian-new-thinkpad>
+
+	* Version set to 2.5.23
+
+	* lvzstrings-mode.el (lvzstrings/lvzstrings-spellcheck-keycomb): Change default key combination for spellcheck from "C-c C-v C-g" to "C-c C-v s".
+
 2023-04-07  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* README.md: Fix HTML examples.
