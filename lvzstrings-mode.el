@@ -106,7 +106,7 @@
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
-(defcustom lvzstrings/lvzstrings-spellcheck-keycomb "C-c C-v C-g" "Default key combination for spell checking the current buffer."
+(defcustom lvzstrings/lvzstrings-spellcheck-keycomb "C-c C-v s" "Default key combination for spell checking the current buffer."
   :type 'string
   :group 'lvzstrings/lvzstrings-keys)
 
