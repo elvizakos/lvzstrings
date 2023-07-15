@@ -387,9 +387,11 @@
 	   (flyspell-buffer))
 
 (defun lvzstrings/spellCheckOntheFlyProg () "Function for enabling spell check."
-  (interactive)
-  (flyspell-mode 1)
-  (flyspell-prog-mode))
+	   (interactive)
+	   (flyspell-mode 1)
+	   (flyspell-prog-mode)
+	   (ispell-change-dictionary "en_US,el_GR,de_DE")
+	   )
 
 (defun lvzstrings/dictionary (start end) "Function for creating new buffer with the definitions of the selected word."
 	   (interactive "r")
@@ -432,7 +434,7 @@
 											   (add-hook 'org-mode-hook 'flyspell-mode)
 
 											   (setq ispell-program-name "hunspell")		   ; Φόρτωση του hunspell για έλεγχο ορθογραφίας
-											   (setq ispell-dictionary "en_US") ; Φόρτωση αγγλικών, ελληνικών και γερμανικών λεξικών
+											   (setq ispell-dictionary "en_US,el_GR,de_DE") ; Φόρτωση αγγλικών, ελληνικών και γερμανικών λεξικών
 											   (setq ispell-local-dictionary "en_US,el_GR,de_DE")
 											   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,el_GR,de_DE") nil utf-8)))
 											   (ispell-set-spellchecker-params)
