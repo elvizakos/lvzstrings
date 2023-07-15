@@ -438,9 +438,9 @@
 											   (setq ispell-local-dictionary "en_US,el_GR,de_DE")
 											   (setq ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US,el_GR,de_DE") nil utf-8)))
 											   (ispell-set-spellchecker-params)
+											   (ispell-change-dictionary ispell-local-dictionary)
 											   (if (> emacs-major-version 24)			   ; Η συνάρτηση "ispell-hunspell-add-multi-dic" δεν υπάρχει σε παλιότερες εκδόσεις του emacs
-												   (ispell-hunspell-add-multi-dic ispell-dictionary))
-											   (ispell-change-dictionary ispell-dictionary)
+												   (ispell-hunspell-add-multi-dic ispell-local-dictionary))
 
 											   (add-hook 'prog-mode-hook 'lvzstrings/spellCheckOntheFlyProg))
 											 ))
