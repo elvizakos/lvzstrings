@@ -2,6 +2,10 @@
 
 	* Version set to 2.5.24
 
+	* Makefile (VERSION): Set version to 2.5.24
+
+	* lvzstrings-mode.el: Change key combination for moving line and indent line.
+
 2023-04-08  elvizakos  <elvizakos@debian-new-thinkpad>
 
 	* Version set to 2.5.23
