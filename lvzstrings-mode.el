@@ -382,6 +382,17 @@
 		   (error "There must be a selection"))
 		 ))
 
+(defun lvzstrings/removehtml (start end) "Function to remove HTML tags from string."
+	   ;; xahlee.info/emacs/emacs/emacs_html_delete_tags.html
+	   (interactive "r")
+	   (let ((txt (buffer-substring start end))
+			 (p 0))
+		 ;; (looking-at "<")
+		 ;; (setq p (point))
+		 ;; (search-forward ">")
+		 ;; (delete-region p (point))
+		 ))
+
 (defun lvzstrings/spellcheck () "Function for spellchecking current buffer."
 	   (interactive)
 	   (flyspell-buffer))
