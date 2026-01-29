@@ -729,7 +729,7 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-dictionary-keycomb) 'lvzstrings/dictionary)
 
 			(progn
-			  (require 'langtool)
+			  ;; (require 'langtool)
 			  (if (commandp 'langtool-check) (progn 
 											   (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-keycomb) 'langtool-check)
 											   (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
