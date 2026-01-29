@@ -562,7 +562,7 @@
 
 											 (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetooldone]
 														 '("End process" . langtool-check-done))
-											 )
+											 ))
 
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
