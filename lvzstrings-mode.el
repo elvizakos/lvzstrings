@@ -677,7 +677,7 @@
 
 											 (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetooldone]
 														 '("End process" . langtool-check-done))
-											 )
+											 ))
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
