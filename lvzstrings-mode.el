@@ -734,7 +734,7 @@
 											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
 											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-correct-buffer-keycomb) 'langtool-correct-buffer)
 											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-done-keycomb) 'langtool-check-done)
-											 )
+											 ))
 
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-region-keycomb) 'flyspell-region)
