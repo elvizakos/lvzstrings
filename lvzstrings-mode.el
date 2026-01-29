@@ -550,17 +550,19 @@
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool]
 			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcheck]
-			  '("Check document" . langtool-check))
+			(if (commandp 'langtool-check) (progn 
+											 (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcheck]
+														 '("Check document" . langtool-check))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolnexterror]
-			  '("Next error" . langtool-goto-next-error))
+											 (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolnexterror]
+														 '("Next error" . langtool-goto-next-error))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcorrectbuffer]
-			  '("Correct buffer" . langtool-correct-buffer))
+											 (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcorrectbuffer]
+														 '("Correct buffer" . langtool-correct-buffer))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetooldone]
-			  '("End process" . langtool-check-done))
+											 (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetooldone]
+														 '("End process" . langtool-check-done))
+											 )
 
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstmenutranslate]
 			  '("Translate region" . lvzstrings/translate-region))
@@ -663,17 +665,19 @@
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool]
 			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcheck]
-			  '("Check document" . langtool-check))
+			(if (commandp 'langtool-check) (progn 
+											 (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcheck]
+														 '("Check document" . langtool-check))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolnexterror]
-			  '("Next error" . langtool-goto-next-error))
+											 (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolnexterror]
+														 '("Next error" . langtool-goto-next-error))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcorrectbuffer]
-			  '("Correct buffer" . langtool-correct-buffer))
+											 (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetoolcorrectbuffer]
+														 '("Correct buffer" . langtool-correct-buffer))
 
-			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetooldone]
-			  '("End process" . langtool-check-done))
+											 (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool lvzstringslanguagetooldone]
+														 '("End process" . langtool-check-done))
+											 )
 
 			(define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringsmenutranslate] ; Translate selected text
 			  '("Translate region" . lvzstrings/translate-region))
@@ -725,10 +729,12 @@
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-dictionary-keycomb) 'lvzstrings/dictionary)
 
 			(require 'langtool)
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-keycomb) 'langtool-check)
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-correct-buffer-keycomb) 'langtool-correct-buffer)
-			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-done-keycomb) 'langtool-check-done)
+			(if (commandp 'langtool-check) (progn 
+											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-keycomb) 'langtool-check)
+											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-goto-next-error-keycomb) 'langtool-goto-next-error)
+											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-correct-buffer-keycomb) 'langtool-correct-buffer)
+											 (define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-langtool-check-done-keycomb) 'langtool-check-done)
+											 )
 
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-keycomb) 'lvzstrings/spellcheck)
 			(define-key lvzstrings/lvzstrings-keymap (kbd lvzstrings/lvzstrings-spellcheck-region-keycomb) 'flyspell-region)
