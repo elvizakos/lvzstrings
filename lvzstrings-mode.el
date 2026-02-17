@@ -432,7 +432,7 @@
 		 ))
 
 ;;---- MINOR MODE ------------------------------------------------------------------
-
+;;;###autoload
 (define-minor-mode lvzstrings-mode "Minor mode for working strings."
   :lighter lvzstrings/lighter
   :keymap (let ((lvzstringsmap (make-sparse-keymap)))
@@ -742,6 +742,7 @@
   (make-local-variable 'lvzstrings/lvzstrings-keymap)
   )
 
+;;;###autoload
 (lvzstrings-mode 1)
 
 (provide 'lvzstrings-mode)
