@@ -547,9 +547,6 @@
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstflyspell lvzstringstmenuspellcorrect]
 			  '("Correct word" . flyspell-correct-word-before-point))
 
-			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool]
-			  (cons "Languagetool" (make-sparse-keymap "languagetool")))
-
 			(define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool lvzstringstlanguagetoolcheck]
 						'("Check document" . langtool-check))
 
@@ -713,6 +710,9 @@
 			;; Load keys and menu items for controling language tool only if langtool exists
 			(when (ignore-errors (require 'langtool nil t))
 			  (require 'langtool)
+
+			  (define-key global-map [menu-bar tools lvzstringstmenu lvzstringstlanguage lvzstringstlanguagetool]
+						  (cons "Languagetool" (make-sparse-keymap "languagetool")))
 
 			  (define-key lvzstrings/lvzstrings-keymap [menu-bar lvzstringsmenu lvzstringslanguage lvzstringslanguagetool]
 						  (cons "Languagetool" (make-sparse-keymap "languagetool")))
