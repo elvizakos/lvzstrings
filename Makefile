@@ -19,8 +19,18 @@ install:
 #emacs -e "(progn (package-initialize)(package-install \'lvzstrings-mode))"
 #emacs25 -e '(progn (package-initialize) (package-install-file "'$(PACKAGE_DIR)'/lvzstrings-mode.el"))'
 	tar -xvf ../$(PACKAGE_NAME).tar -C ~/.emacs.d/elpa/
+	emacs --batch --eval "\
+		(progn \
+			(require 'package) \
+			(package-initialize) \
+			(package-install-file \"/tmp/$(PACKAGE_NAME)\"))"
 
 remove:
+	emacs --batch --eval "\
+		(progn \
+			(require 'package) \
+			(package-initialize) \
+			(package-delete (cadr (assq 'lvzstrings-mode package-alist))))"
 	rm -rf ~/.emacs.d/elpa/$(PACKAGE_NAME)
 
 clean:
